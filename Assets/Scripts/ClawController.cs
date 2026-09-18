@@ -20,7 +20,13 @@ public class ClawController : MonoBehaviour
     private GrabPoint grabPoint;
 
     [SerializeField]
+    private Transform destroyPoint;
+
+    [SerializeField]
     private float verticalSpeed = 3f;
+
+    [SerializeField]
+    private float autoMoveSpeed = 5f;
 
     [SerializeField]
     private float downPositionY = -2.5f;
@@ -65,6 +71,8 @@ public class ClawController : MonoBehaviour
     private IEnumerator GrabSequence()
     {
         isBusy = true;
+
+        float startX = transform.position.x;
 
         Vector3 startPosition = clawVertical.localPosition;
 
@@ -114,7 +122,43 @@ public class ClawController : MonoBehaviour
 
         if (item != null)
         {
+            while (Mathf.Abs(transform.position.x - destroyPoint.position.x) > 0.01f)
+            {
+                float newX = Mathf.MoveTowards(
+                    transform.position.x,
+                    destroyPoint.position.x,
+                    autoMoveSpeed * Time.deltaTime
+                );
+
+                transform.position = new Vector3(
+                    newX,
+                    transform.position.y,
+                    transform.position.z
+                );
+
+                yield return null;
+            }
+
             Destroy(item.gameObject);
+
+            yield return new WaitForSeconds(0.3f);
+
+            while (Mathf.Abs(transform.position.x - startX) > 0.01f)
+            {
+                float newX = Mathf.MoveTowards(
+                    transform.position.x,
+                    startX,
+                    autoMoveSpeed * Time.deltaTime
+                );
+
+                transform.position = new Vector3(
+                    newX,
+                    transform.position.y,
+                    transform.position.z
+                );
+
+                yield return null;
+            }
         }
 
         isBusy = false;

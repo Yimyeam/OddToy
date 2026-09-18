@@ -541,6 +541,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &459890388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 459890389}
+  m_Layer: 0
+  m_Name: DestroyPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &459890389
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459890388}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.5, y: 4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &657001192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,7 +1198,9 @@ MonoBehaviour:
   rightLimit: 5
   clawVertical: {fileID: 2054225579}
   grabPoint: {fileID: 1742254196}
+  destroyPoint: {fileID: 459890389}
   verticalSpeed: 3
+  autoMoveSpeed: 5
   downPositionY: -2.5
 --- !u!1 &2054225578
 GameObject:
@@ -1328,3 +1361,4 @@ SceneRoots:
   - {fileID: 912455164}
   - {fileID: 414343551}
   - {fileID: 2042820114}
+  - {fileID: 459890389}
