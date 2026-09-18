@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,16 @@ public class ClawController : MonoBehaviour
     [SerializeField]
     private float rightLimit = 5f;
 
+    [SerializeField]
+    private Transform clawVertical;
+
+    [SerializeField]
+    private float verticalSpeed = 3f;
+
+    [SerializeField]
+    private float downPositionY = -2.5f;
+
+    private bool isBusy;
     void Start()
     {
 
@@ -19,11 +30,17 @@ public class ClawController : MonoBehaviour
 
     void Update()
     {
+        if (isBusy)
+            return;
+
         if (Keyboard.current.dKey.isPressed)
             MoveRight();
 
         if (Keyboard.current.aKey.isPressed)
             MoveLeft();
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            StartCoroutine(GrabSequence());
     }
 
     private void MoveRight()
@@ -40,5 +57,45 @@ public class ClawController : MonoBehaviour
 
         if (transform.position.x < leftLimit)
             transform.position = new Vector3(leftLimit, transform.position.y, transform.position.z);
+    }
+
+    private IEnumerator GrabSequence()
+    {
+        isBusy = true;
+
+        Vector3 startPosition = clawVertical.localPosition;
+        Vector3 downPosition = new Vector3(
+            startPosition.x,
+            downPositionY,
+            startPosition.z
+        );
+
+        while (Vector3.Distance(clawVertical.localPosition, downPosition) > 0.01f)
+        {
+            clawVertical.localPosition = Vector3.MoveTowards(
+                clawVertical.localPosition,
+                downPosition,
+                verticalSpeed * Time.deltaTime
+            );
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.3f);
+
+        while (Vector3.Distance(clawVertical.localPosition, startPosition) > 0.01f)
+        {
+            clawVertical.localPosition = Vector3.MoveTowards(
+                clawVertical.localPosition,
+                startPosition,
+                verticalSpeed * Time.deltaTime
+            );
+
+            yield return null;
+        }
+
+        clawVertical.localPosition = startPosition;
+
+        isBusy = false;
     }
 }

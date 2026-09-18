@@ -2,15 +2,31 @@ using UnityEngine;
 
 public class GrabPoint : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private ConveyorItem currentItem;
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        ConveyorItem item = other.GetComponent<ConveyorItem>();
+
+        if (item == null)
+            return;
+
+        currentItem = item;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit(Collider other)
     {
-        
+        ConveyorItem item = other.GetComponent<ConveyorItem>();
+
+        if (item == null)
+            return;
+
+        if (currentItem == item)
+            currentItem = null;
+    }
+
+    public ConveyorItem GetCurrentItem()
+    {
+        return currentItem;
     }
 }
