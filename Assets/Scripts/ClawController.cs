@@ -17,6 +17,9 @@ public class ClawController : MonoBehaviour
     private Transform clawVertical;
 
     [SerializeField]
+    private GrabPoint grabPoint;
+
+    [SerializeField]
     private float verticalSpeed = 3f;
 
     [SerializeField]
@@ -64,6 +67,7 @@ public class ClawController : MonoBehaviour
         isBusy = true;
 
         Vector3 startPosition = clawVertical.localPosition;
+
         Vector3 downPosition = new Vector3(
             startPosition.x,
             downPositionY,
@@ -81,6 +85,18 @@ public class ClawController : MonoBehaviour
             yield return null;
         }
 
+        ConveyorItem item = grabPoint.GetCurrentItem();
+
+        if (item != null)
+        {
+            item.enabled = false;
+
+            item.transform.SetParent(grabPoint.transform);
+            item.transform.localPosition = Vector3.zero;
+
+            grabPoint.ClearCurrentItem();
+        }
+
         yield return new WaitForSeconds(0.3f);
 
         while (Vector3.Distance(clawVertical.localPosition, startPosition) > 0.01f)
@@ -95,6 +111,11 @@ public class ClawController : MonoBehaviour
         }
 
         clawVertical.localPosition = startPosition;
+
+        if (item != null)
+        {
+            Destroy(item.gameObject);
+        }
 
         isBusy = false;
     }

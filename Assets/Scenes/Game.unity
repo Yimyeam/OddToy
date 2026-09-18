@@ -1165,6 +1165,10 @@ MonoBehaviour:
   moveSpeed: 3
   leftLimit: -5
   rightLimit: 5
+  clawVertical: {fileID: 2054225579}
+  grabPoint: {fileID: 1742254196}
+  verticalSpeed: 3
+  downPositionY: -2.5
 --- !u!1 &2054225578
 GameObject:
   m_ObjectHideFlags: 0
