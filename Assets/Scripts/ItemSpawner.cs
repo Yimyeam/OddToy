@@ -3,10 +3,16 @@ using UnityEngine;
 public class ItemSpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject itemPrefab;
+    private GameObject normalItem;
+
+    [SerializeField]
+    private GameObject anomalyItem;
 
     [SerializeField]
     private float spawnInterval = 2f;
+
+    [SerializeField]
+    private int anomalyChance = 30;
 
     private float timer;
 
@@ -28,6 +34,15 @@ public class ItemSpawner : MonoBehaviour
 
     private void SpawnItem()
     {
-        Instantiate(itemPrefab, transform.position, Quaternion.identity);
+        int randomNumber = Random.Range(0, 100);
+
+        if (randomNumber < anomalyChance)
+        {
+            Instantiate(anomalyItem, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(normalItem, transform.position, Quaternion.identity);
+        }
     }
 }
