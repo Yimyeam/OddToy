@@ -57,6 +57,9 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int point)
     {
+        if (isGameOver)
+            return;
+
         score += point;
 
         scoreText.text = "SCORE: " + score;

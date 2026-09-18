@@ -16,6 +16,9 @@ public class ItemSpawner : MonoBehaviour
 
     private float timer;
 
+    private bool lastWasAnomaly;
+    private int normalCount;
+
     void Start()
     {
 
@@ -34,15 +37,37 @@ public class ItemSpawner : MonoBehaviour
 
     private void SpawnItem()
     {
-        int randomNumber = Random.Range(0, 100);
+        bool spawnAnomaly = false;
 
-        if (randomNumber < anomalyChance)
+        if (lastWasAnomaly)
+        {
+            spawnAnomaly = false;
+        }
+        else if (normalCount >= 4)
+        {
+            spawnAnomaly = true;
+        }
+        else
+        {
+            int randomNumber = Random.Range(0, 100);
+
+            if (randomNumber < anomalyChance)
+                spawnAnomaly = true;
+        }
+
+        if (spawnAnomaly)
         {
             Instantiate(anomalyItem, transform.position, Quaternion.identity);
+
+            lastWasAnomaly = true;
+            normalCount = 0;
         }
         else
         {
             Instantiate(normalItem, transform.position, Quaternion.identity);
+
+            lastWasAnomaly = false;
+            normalCount++;
         }
     }
 }
