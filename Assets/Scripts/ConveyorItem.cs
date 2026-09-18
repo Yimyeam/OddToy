@@ -2,13 +2,20 @@ using UnityEngine;
 
 public class ConveyorItem : MonoBehaviour
 {
-    public float moveSpeed = 2f;
+    [SerializeField]
+    private float moveSpeed = 1.5f;
+
     void Start()
     {
-        
+
     }
 
     void Update()
+    {
+        MoveItem();
+    }
+
+    private void MoveItem()
     {
         transform.position += Vector3.right * moveSpeed * Time.deltaTime;
     }

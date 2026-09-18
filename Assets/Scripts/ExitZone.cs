@@ -4,9 +4,11 @@ public class ExitZone : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Item"))
-        {
-            Destroy(other.gameObject);
-        }
+        ConveyorItem item = other.GetComponent<ConveyorItem>();
+
+        if (item == null)
+            return;
+
+        Destroy(item.gameObject);
     }
 }
