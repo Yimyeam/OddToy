@@ -139,6 +139,15 @@ public class ClawController : MonoBehaviour
                 yield return null;
             }
 
+            if (item.GetToyType() == ToyType.Anomaly)
+            {
+                GameManager.instance.AddScore(3);
+            }
+            else
+            {
+                GameManager.instance.AddScore(-2);
+            }
+
             Destroy(item.gameObject);
 
             yield return new WaitForSeconds(0.3f);

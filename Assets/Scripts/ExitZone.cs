@@ -9,6 +9,15 @@ public class ExitZone : MonoBehaviour
         if (item == null)
             return;
 
+        if (item.GetToyType() == ToyType.Normal)
+        {
+            GameManager.instance.AddScore(1);
+        }
+        else
+        {
+            GameManager.instance.AddScore(-3);
+        }
+
         Destroy(item.gameObject);
     }
 }
