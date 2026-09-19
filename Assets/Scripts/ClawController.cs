@@ -20,6 +20,9 @@ public class ClawController : MonoBehaviour
     private GrabPoint grabPoint;
 
     [SerializeField]
+    private ClawVisual clawVisual;
+
+    [SerializeField]
     private Transform destroyPoint;
 
     [SerializeField]
@@ -93,6 +96,10 @@ public class ClawController : MonoBehaviour
             yield return null;
         }
 
+        clawVisual.CloseClaw();
+
+        yield return new WaitForSeconds(0.25f);
+
         ConveyorItem item = grabPoint.GetCurrentItem();
 
         if (item != null)
@@ -119,6 +126,13 @@ public class ClawController : MonoBehaviour
         }
 
         clawVertical.localPosition = startPosition;
+
+        if (item == null)
+        {
+            clawVisual.OpenClaw();
+
+            yield return new WaitForSeconds(0.25f);
+        }
 
         if (item != null)
         {
@@ -147,6 +161,10 @@ public class ClawController : MonoBehaviour
             {
                 GameManager.instance.AddScore(-2);
             }
+
+            clawVisual.OpenClaw();
+
+            yield return new WaitForSeconds(0.25f);
 
             Destroy(item.gameObject);
 

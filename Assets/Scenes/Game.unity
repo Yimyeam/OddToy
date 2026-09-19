@@ -160,6 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 84103014}
+  - component: {fileID: 84103015}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -183,6 +184,23 @@ Transform:
   - {fileID: 1382412993}
   m_Father: {fileID: 2054225579}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &84103015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84103013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5fc02fee26ef5a4880ecaf69cb98e4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClawVisual
+  leftClaw: {fileID: 472371628}
+  rightClaw: {fileID: 1682341616}
+  leftClosedRotation: {x: 75.5, y: -270, z: -90}
+  rightClosedRotation: {x: -47.277, y: 90, z: -90}
+  moveSpeed: 6
 --- !u!1 &103183893
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,6 +843,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &472371628 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8879528566716807029, guid: f40803c5b9985924289380b4544b18ab, type: 3}
+  m_PrefabInstance: {fileID: 511925371}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &511925371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2176,6 +2199,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582363349}
   m_CullTransparentMesh: 1
+--- !u!4 &1682341616 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4128383740851021839, guid: f40803c5b9985924289380b4544b18ab, type: 3}
+  m_PrefabInstance: {fileID: 511925371}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1742254194
 GameObject:
   m_ObjectHideFlags: 0
@@ -2542,6 +2570,7 @@ MonoBehaviour:
   rightLimit: 5
   clawVertical: {fileID: 2054225579}
   grabPoint: {fileID: 1742254196}
+  clawVisual: {fileID: 84103015}
   destroyPoint: {fileID: 459890389}
   verticalSpeed: 3
   autoMoveSpeed: 5
