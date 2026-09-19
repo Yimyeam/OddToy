@@ -480,7 +480,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.5
+  orthographic size: 3.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -724,7 +724,7 @@ Transform:
   m_GameObject: {fileID: 414343549}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 0.66, z: 0}
+  m_LocalPosition: {x: -5, y: 1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1331,7 +1331,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 912455159}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2332,7 +2332,7 @@ MonoBehaviour:
   destroyPoint: {fileID: 459890389}
   verticalSpeed: 3
   autoMoveSpeed: 5
-  downPositionY: -2.5
+  downPositionY: -2
 --- !u!1 &2054225578
 GameObject:
   m_ObjectHideFlags: 0
