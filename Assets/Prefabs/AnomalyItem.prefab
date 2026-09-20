@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aed46cce02456c4b92435ea4d54fbf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ConveyorItem
-  moveSpeed: 1.6
+  moveSpeed: 1.7
   toyType: 1
 --- !u!54 &8319459975688941262
 Rigidbody:
