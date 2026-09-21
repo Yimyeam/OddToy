@@ -34,6 +34,22 @@ public class ClawController : MonoBehaviour
     [SerializeField]
     private float downPositionY = -2.5f;
 
+    [SerializeField]
+    private AudioSource moveAudioSource;
+
+    [SerializeField]
+    private AudioSource sfxAudioSource;
+
+    [SerializeField]
+    private AudioClip clawClangClip;
+
+    [SerializeField]
+    private AudioClip grabClip;
+
+    [SerializeField]
+    private AudioClip dropClip;
+
+
     private bool isBusy;
     void Start()
     {
@@ -51,8 +67,22 @@ public class ClawController : MonoBehaviour
         if (Keyboard.current.aKey.isPressed)
             MoveLeft();
 
+        if (Keyboard.current.dKey.wasPressedThisFrame ||
+            Keyboard.current.aKey.wasPressedThisFrame)
+        {
+            moveAudioSource.Stop();
+            moveAudioSource.Play();
+        }
+
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
             StartCoroutine(GrabSequence());
+    }
+
+
+    private void StopMoveSound()
+    {
+        if (moveAudioSource.isPlaying)
+            moveAudioSource.Stop();
     }
 
     private void MoveRight()
@@ -97,6 +127,7 @@ public class ClawController : MonoBehaviour
         }
 
         clawVisual.CloseClaw();
+        sfxAudioSource.PlayOneShot(clawClangClip, 0.15f);
 
         yield return new WaitForSeconds(0.25f);
 
@@ -104,6 +135,8 @@ public class ClawController : MonoBehaviour
 
         if (item != null)
         {
+            sfxAudioSource.PlayOneShot(grabClip, 0.25f);
+
             item.enabled = false;
 
             item.transform.SetParent(grabPoint.transform);
@@ -164,7 +197,7 @@ public class ClawController : MonoBehaviour
 
             clawVisual.OpenClaw();
 
-            yield return new WaitForSeconds(0.25f);
+            sfxAudioSource.PlayOneShot(dropClip, 0.05f);
 
             Destroy(item.gameObject);
 
